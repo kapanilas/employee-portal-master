@@ -1,0 +1,19 @@
+.card-body{
+    width: 55%;
+    margin: 0 auto;
+}
+.mandatory{
+    color: red;
+}
+.card-header{ 
+    text-align: center; 
+    font-size: 140%;
+}
+
+.regbtn{
+    margin: 0 auto; 
+}
+.message{
+    text-align: center;
+    font-size: 120%;
+}

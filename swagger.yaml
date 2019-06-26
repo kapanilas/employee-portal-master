@@ -1,0 +1,96 @@
+swagger: '2.0'
+info:
+  title: Employee Protal API
+  description: Manage the Employees of The Company
+  version: "1.0.0"
+# the domain of the service
+host: api.ep.com
+
+# array of all schemes that your API supports
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /employeePortal
+produces:
+  - application/json
+paths:
+  /employee:
+    post:
+      summary: Registration of the Employee
+      description: Register an employee in the Employee Portal
+      operationId: registerEmployee
+      parameters:
+        - name: employee
+          in: body
+          description : Employee Details
+          required: true
+          schema:
+            $ref : '#/definitions/Employee'
+      responses:
+        200:
+          description: Employee is registered
+          schema:
+            type : string
+            description : Employee registered
+        409:
+          description: Employee already Exist
+          schema:
+            type : string
+            description : Employee already Exist
+        default:
+          description : Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /employees:
+    get:
+      summary: Gets all Employees
+      description: Fetch all employees
+      operationId: getAllEmployees
+      responses:
+        200:
+          description: List of Employees
+          schema:
+            type: array
+            items:
+              $ref : '#/definitions/Employee'
+        400:
+          description: Bad request
+          schema:
+            type: string
+            description : No employees in the DataBase
+        default:
+          description : Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Employee:
+    type: object
+    properties:
+      employeeId:
+        type: number
+        description: ID of the Employee
+      firstName:
+        type : string
+        description: First Name of the Employee
+      lastName:
+        type: string
+        description : Last Name of the Employee
+      gender:
+        type: string
+        description: Gender of the Employee
+      dob:
+        type: string
+        description : Date of Birth of the Employee
+      department:
+        type: string
+        description : Department of the Employee
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string

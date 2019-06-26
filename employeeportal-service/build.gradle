@@ -1,0 +1,75 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.1.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+		maven {
+		url 'http://inblresdpjks01.eng.med.ge.com:8081/artifactory/libs-release'
+}
+		maven {
+		url 'http://inblresdpjks01.eng.med.ge.com:8081/artifactory/ext-release'
+} 
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.2.1")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'org.springframework.boot'
+
+archivesBaseName = 'employeeportal'
+group = 'com.sg.ep'
+version = '1.0.0'
+
+description = """employeeportal"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+repositories {
+	mavenCentral()
+	jcenter()
+}
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version:'1.4.2.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.4.2.RELEASE'
+    compile group: 'io.springfox', name: 'springfox-swagger2', version:'2.5.0'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version:'2.5.0'
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-joda', version:'2.8.4'
+    // https://mvnrepository.com/artifact/com.github.joschi.jackson/jackson-datatype-threetenbp
+	compile group: 'com.github.joschi.jackson', name: 'jackson-datatype-threetenbp', version: '2.6.4'
+    compile group: 'joda-time', name: 'joda-time', version:'2.9.5'
+    compile group: 'redis.clients', name: 'jedis', version:'2.9.0'
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+    /* testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'1.4.2.RELEASE') {
+		exclude(module: 'commons-logging')
+    }*/
+	
+    compile(group: 'javax.validation', name: 'validation-api', version:'1.1.0.Final') {
+       /* This dependency was originally in the Maven provided scope, but the project was not of type war.
+       This behavior is not yet supported by Gradle, so this dependency has been converted to a compile dependency.
+       Please review and delete this closure when resolved. */
+    }
+	
+	testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test')
+	testCompile(group: 'org.mockito', name: 'mockito-core', version: '1.10.19')
+	testCompile(group: 'junit', name: 'junit', version: '4.12')
+	testCompile group: 'org.powermock', name: 'powermock-core', version: '1.7.0'
+	testCompile group: 'org.powermock', name: 'powermock-api-mockito', version: '1.7.0'
+	testCompile group: 'org.powermock', name: 'powermock-api-mockito-common', version: '1.7.0'
+	testCompile group: 'org.powermock', name: 'powermock-module-junit4', version: '1.7.0' 
+}

@@ -1,0 +1,121 @@
+<div class="card">
+    <div class="card-header">
+        <b>REGISTER NEW EMPLOYEE</b>
+    </div>
+
+    <div class="card-body">
+        <form novalidate (ngSubmit)="register()" [formGroup]="employeeForm">
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="employeeId">Employee Id <span
+                        class="mandatory">*</span></label>
+                <div class="col-md-8">
+                    <input class="form-control" id="employeeId" type="number" placeholder="Employee ID (required)"
+                        formControlName="employeeId" [ngClass]="{'is-invalid': (employeeForm.get('employeeId').touched ||
+                                                                      employeeForm.get('employeeId').dirty) &&
+                                                                      !employeeForm.get('employeeId').valid }" />
+                    <span class="invalid-feedback">
+                        <span *ngIf="employeeForm.get('employeeId').errors?.required">
+                            Please enter Employee ID.
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="firstNameId">First Name <span
+                        class="mandatory">*</span></label>
+                <div class="col-md-8">
+                    <input class="form-control" id="firstNameId" type="text" placeholder="First Name (required)"
+                        formControlName="firstName" [ngClass]="{'is-invalid': (employeeForm.get('firstName').touched ||
+                                              employeeForm.get('firstName').dirty) &&
+                                              !employeeForm.get('firstName').valid }" />
+                    <span class="invalid-feedback">
+                        <span *ngIf="employeeForm.get('firstName').errors?.required">
+                            Please enter your first name.
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="lastNameId">Last Name <span
+                        class="mandatory">*</span></label>
+                <div class="col-md-8">
+                    <input class="form-control" id="lastNameId" type="text" placeholder="Last Name (required)"
+                        formControlName="lastName" [ngClass]="{'is-invalid': (employeeForm.get('lastName').touched ||
+                                              employeeForm.get('lastName').dirty) &&
+                                              !employeeForm.get('lastName').valid }" />
+                    <span class="invalid-feedback">
+                        <span *ngIf="employeeForm.get('lastName').errors?.required">
+                            Please enter your last name.
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label pt-0">Gender</label>
+                <div class="col-md-8">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" value="Male" formControlName="gender">
+                            Male
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" value="Female" formControlName="gender">
+                            Female
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" value="Others" formControlName="gender">
+                            Others
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="ratingId">Date Of Birth</label>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input style="margin-left: 16px;" class="form-control" placeholder="yyyy-mm-dd" name="dp"
+                            formControlName="dob" ngbDatepicker #d="ngbDatepicker">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary btn-outline-secondary" (click)="d.toggle()"
+                                type="button"><i class="fa fa-calendar-check-o"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label pt-0">Department</label>
+                <select style="margin-left: 16px;" class="col-md-6" id="departmentId" name="department"
+                    formControlName="department">
+                    <option value="" disabled selected hidden>Select a Department...</option>
+                    <option value="Engineering/Technology">Engineering/Technology</option>
+                    <option value="Human Resources">Human Resources</option>
+                    <option value="Finance/Accounting">Finance/Accounting</option>
+                    <option value="Consultants">Consultants</option>
+                </select>
+            </div>
+
+
+            <div class="form-group row mb-2">
+                <div class="offset-md-2 col-md-2 regbtn">
+                    <button class="btn btn-primary mr-3" type="submit" style="width:120px"
+                        [title]="employeeForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                        [disabled]="!employeeForm.valid">
+                        Register
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <p id="messageHolder" class="message">{{message}}</p>
+    </div>
+</div>

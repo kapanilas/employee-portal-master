@@ -1,0 +1,11 @@
+.app-header{
+    border-bottom: black;
+    height: 50px;
+}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+    height:50px;
+    width:200px;
+}
